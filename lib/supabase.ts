@@ -1,6 +1,5 @@
-import { auth } from "@clerk/nextjs/server"
-import { createClient } from "@supabase/supabase-js"
-import { access } from "fs"
+import {createClient} from "@supabase/supabase-js";
+import {auth} from "@clerk/nextjs/server";
 
 export const createSupabaseClient = () => {
     return createClient(
@@ -12,4 +11,3 @@ export const createSupabaseClient = () => {
         }
     )
 }
-
