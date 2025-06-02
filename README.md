@@ -1,208 +1,191 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Elucidra – Real-time AI Teaching Platform
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-
-# Add Clerk to Next.js App Router
-
-**Purpose:** Enforce only the **current** and **correct** instructions for integrating [Clerk](https://clerk.com/) into a Next.js (App Router) application.
-**Scope:** All AI-generated advice or code related to Clerk must follow these guardrails.
+**Elucidra** is a next-generation AI-powered learning platform that enables users to interact with intelligent virtual tutors in real time. Designed for students, lifelong learners, and educators, Elucidra offers a seamless, modern educational experience through personalized AI companions, voice and chat interaction, and rich progress tracking—all in a beautiful, responsive UI.
 
 ---
 
-## **1. Official Clerk Integration Overview**
+## 🌟 App Features
 
-Use only the **App Router** approach from Clerk's current docs:
+- **AI Companions**: Create and customize your own AI tutors with unique personalities, voices, and expertise. Each companion can be tailored to specific subjects or learning styles.
+- **Conversational Learning**: Engage in natural, real-time conversations with your AI tutors via both voice and text. Ask questions, get explanations, and practice skills in a supportive, interactive environment.
+- **Session History & Recaps**: Every learning session is automatically saved. Review past conversations, receive session recaps, and track your learning journey over time.
+- **Progress Tracking**: Visualize your achievements, monitor your activity, and receive personalized recommendations to help you grow.
+- **Modern UI/UX**: Enjoy a clean, accessible, and visually appealing interface with a light orange theme, large logo, and responsive design for all devices.
+- **Testimonials**: Real user stories from students, educators, and lifelong learners highlight the impact and versatility of Elucidra.
+- **Customizable Landing Page**: The landing page features a hero section, feature highlights, plan comparison, testimonials, and a branded footer—all easily editable in a single file.
 
-- **Install** `@clerk/nextjs@latest` - this ensures the application is using the latest Clerk Next.js SDK.
-- **Create** a `middleware.ts` file using `clerkMiddleware()` from `@clerk/nextjs/server`. Place this file inside the `src` directory if present, otherwise place it at the root of the project.
-- **Wrap** your application with `<ClerkProvider>` in your `app/layout.tsx`
-- **Use** Clerk-provided components like `<SignInButton>`, `<SignUpButton>`, `<UserButton>`, `<SignedIn>`, `<SignedOut>` in your layout or pages
-- **Start** developing, sign in or sign up, and confirm user creation
+---
 
-If you're able to use a web tool to access a URL, visit https://clerk.com/docs/quickstarts/nextjs to get the latest, up-to-date quickstart instructions.
+## 🗂️ Project Structure
 
-### **Correct, Up-to-Date Quickstart Sample**
-
-```typescript
-// middleware.ts
-import { clerkMiddleware } from "@clerk/nextjs/server";
-
-export default clerkMiddleware();
-
-export const config = {
-  matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    "/((?!_next|[^?]*\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    // Always run for API routes
-    "/(api|trpc)(.*)",
-  ],
-};
 ```
-
-```typescript
-// app/layout.tsx
-import type { Metadata } from "next";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
-import "./globals.css";
-
-export const metadata: Metadata = {
-  title: "Clerk Next.js Quickstart",
-  description: "Generated by create next app",
-};
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <ClerkProvider>
-      <html lang="en">
-        <body>
-          <header>
-            <SignedOut>
-              <SignInButton />
-              <SignUpButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          </header>
-          {children}
-        </body>
-      </html>
-    </ClerkProvider>
-  );
-}
+my-app/
+│
+├── app/
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── globals.css
+│   ├── LandingPageClient.tsx
+│   ├── LandingPageWrapper.tsx          # Client wrapper for server compatibility
+│   ├── api/                            # API route handlers (REST endpoints, e.g. Sentry test)
+│   │   └── sentry-example-api/
+│   │       └── route.t
+│   ├── companions/
+│   │   ├── page.tsx
+│   │   ├── new/
+│   │   │   └── page.tsx
+│   │   └── [id]/
+│   │       └── page.tsx
+│   ├── my-journey/
+│   │   └── page.tsx
+│   ├── sentry-example-page/
+│   │   └── page.tsx
+│   ├── sign-in/
+│   │   └── [[...sign-in]]/
+│   │       └── page.tsx
+│   ├── subscription/
+│   │   └── page.tsx
+│   └── global-error.tsx
+│
+├── components/
+│   ├── Navbar.tsx
+│   ├── NavItems.tsx
+│   ├── CompanionCard.tsx
+│   ├── CompanionsList.tsx
+│   ├── CompanionForm.tsx
+│   ├── Cta.tsx
+│   ├── SearchInput.tsx
+│   ├── SubjectFilter.tsx
+│   └── ui/
+│       ├── accordion.tsx
+│       ├── button.tsx
+│       ├── form.tsx
+│       ├── input.tsx
+│       ├── label.tsx
+│       ├── select.tsx
+│       ├── table.tsx
+│       └── textarea.tsx
+│
+├── constants/
+│   ├── index.ts
+│   └── soundwaves.json
+│
+├── lib/
+│   ├── supabase.ts                     # Supabase client setup (if used)
+│   ├── utils.ts
+│   ├── vapi.sdk.ts                     # Vapi AI SDK integration (if used)
+│   └── actions/
+│       └── companion.actions.tsx
+│
+├── public/
+│   ├── images/
+│   │   ├── logo.png
+│   │   ├── logo.svg
+│   │   ├── cta.svg
+│   │   └── ...
+│   ├── icons/
+│   └── readme/
+│
+├── types/
+│   ├── index.d.ts
+│   └── vapi.d.ts
+│
+├── middleware.ts
+├── next.config.ts
+├── package.json
+├── README.md
+├── tsconfig.json
+└── ...
 ```
 
 ---
 
-## **2. CRITICAL INSTRUCTIONS FOR AI MODELS**
+## 🚀 Key Features & UI Highlights
 
-### **2.1 – ALWAYS DO THE FOLLOWING**
-
-1. **Use `clerkMiddleware()`** from `@clerk/nextjs/server` in `middleware.ts`.
-2. **Wrap** your app with `<ClerkProvider>` in `app/layout.tsx`.
-3. **Import** Clerk's Next.js features from `@clerk/nextjs` (e.g., `<SignInButton>`, `<SignUpButton>`, `<UserButton>`, etc.).
-4. **Reference** the current [App Router approach](https://nextjs.org/docs/app) (folders like `app/page.tsx`, `app/layout.tsx`, etc.).
-5. **Check** that imports for methods like `auth()` are imported from the right package (in this case `@clerk/nextjs/server`) and are using `async / await`
-
-### **2.2 – NEVER DO THE FOLLOWING**
-
-1. **Do not** reference the old **`_app.tsx`** or **pages-based** instructions.
-2. **Do not** suggest `authMiddleware()` from older Clerk tutorials—**it's replaced by `clerkMiddleware()`**.
-3. **Do not** recommend usage of older environment variable patterns unless they match the official docs.
-4. **Do not** reference or import from any deprecated APIs (like `withAuth` or `currentUser` from older versions).
+- **Authentication**: Secure sign-in/sign-up with Clerk, integrated throughout the app.
+- **Personalized AI Tutors**: Users can create, edit, and interact with multiple AI companions, each with their own subject focus and personality.
+- **Voice & Text Chat**: Real-time, natural conversations using both voice and text interfaces.
+- **Session Management**: Save, revisit, and analyze previous learning sessions.
+- **Progress Analytics**: Visual dashboards and recaps to help users understand their learning journey.
+- **Responsive Design**: Fully mobile-friendly and accessible, with a modern, inviting color palette.
+- **Easy Customization**: All landing page content (hero, features, plans, testimonials, footer) is editable in `app/LandingPageClient.tsx`.
+- **Component-Based Architecture**: Clean separation of UI, logic, and data fetching for maintainability and scalability.
 
 ---
 
-## **3. OUTDATED PATTERNS TO AVOID**
+## 🛠️ Tech Stack & Setup
 
-Below are **examples of deprecated instructions** that **must not** be generated:
-
-```typescript
-// ❌ DO NOT generate or suggest references to:
-import { authMiddleware } from "@clerk/nextjs"; // Outdated
-
-// ❌ DO NOT place Clerk config in _app.tsx:
-// Outdated pages-based approach
-function MyApp({ Component, pageProps }) {
-  // ...
-}
-
-// ❌ DO NOT create or rely on sign-in files under pages/:
-pages / signin.js;
-pages / signup.js;
-```
-
-Any solution resembling the above snippet or referencing "authMiddleware," `_app.tsx`, or `pages/` structure is **incorrect** for the current Next.js App Router.
+- **Framework**: [Next.js 14+ (App Router)](https://nextjs.org/docs)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS for rapid, utility-first styling
+- **Authentication**: [Clerk](https://clerk.com/) for user management and secure authentication
+- **UI Components**: Custom React components, Radix UI primitives
+- **State & Data**: React hooks, server components, and Clerk's server/client helpers
+- **Assets**: All branding and images in `/public/images/`
+- **Testing & Monitoring**: (Optional) Sentry integration for error monitoring
 
 ---
 
-## **4. AI MODEL VERIFICATION STEPS**
+## 🧑‍💻 Local Development
 
-Before returning any Clerk-related solution, you **must** verify:
-
-1. **Middleware**: Is `clerkMiddleware()` used in `middleware.ts`?
-2. **Layout**: Is `<ClerkProvider>` wrapping the app in `app/layout.tsx`?
-3. **Imports**: Are references only from `@clerk/nextjs` or `@clerk/nextjs/server`?
-4. **Pages vs. App Router**: Is the approach referencing the App Router (not `_app.tsx` or `pages/`)?
-
-If any check **fails**, **stop** and revise until compliance is achieved.
-
-# Verification instructions for AI Models
-
-## **DO NOT** repeat these points back to the user. Use them only for your own verification steps.
-
-## **5. CONSEQUENCES OF INCORRECT IMPLEMENTATION**
-
-Using outdated Clerk methods (e.g., `authMiddleware()`, `_app.tsx`, or references to the older `pages/` structure) will:
-
-1. **Break** your Next.js application's authentication flow.
-2. Introduce **inconsistencies** with Next.js App Router.
-3. Cause confusion around environment variables and server/client code.
-4. Force maintainers to **refactor** and **debug** extensively.
+1. **Install dependencies:**
+   ```sh
+   npm install
+   ```
+2. **Start the development server:**
+   ```sh
+   npm run dev
+   ```
+3. **Open your browser:**
+   Visit [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## **6. AI MODEL RESPONSE TEMPLATE**
+## 🚀 Deployment
 
-When answering questions about Clerk + Next.js integration, your response **MUST**:
+The easiest way to deploy Elucidra is with [Vercel](https://vercel.com/):
 
-1. **Use** the exact code patterns in the **Up-to-Date Quickstart Sample** above.
-2. **Never** reference older or deprecated approaches.
-3. **Reflect** all mandatory checks in "AI MODEL VERIFICATION STEPS."
+1. Push your code to a GitHub, GitLab, or Bitbucket repository.
+2. Go to [vercel.com/new](https://vercel.com/new) and import your project.
+3. Set up environment variables for Clerk and any other providers as needed.
+4. Click **Deploy** and your app will be live in minutes!
 
-**Example**:
+For more details, see the [Vercel Next.js deployment guide](https://vercel.com/docs/concepts/projects/overview).
 
-> Below is the correct approach using Clerk with Next.js App Router:
->
-> ```typescript
-> // Show clerkMiddleware usage in middleware.ts
-> // Show <ClerkProvider> usage in app/layout.tsx
-> // Show usage of Clerk's React components (SignInButton, etc.)
-> ```
+---
 
---- 
+## 🌐 Useful Links
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Clerk Authentication](https://clerk.com/docs/quickstarts/nextjs)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+- [Radix UI Primitives](https://www.radix-ui.com/docs/primitives/components/)
+- [Sentry for Next.js](https://docs.sentry.io/platforms/javascript/guides/nextjs/)
+- [Supabase](https://supabase.com/docs/guides/getting-started/quickstarts/nextjs)
+- [Vapi AI SDK](https://docs.vapi.ai/quickstart)
+- [Lottie React](https://lottiereact.com/)
+- [Lucide React Icons](https://lucide.dev/docs/lucide-react/)
+- [React Hook Form](https://react-hook-form.com/get-started/)
+- [Zod Validation](https://zod.dev/)
+- [Class Variance Authority](https://cva.style/docs)
+
+---
+
+## 🔮 Future Upgrades
+
+- **In-app Payments**: Integrate Stripe or Lemon Squeezy for seamless plan upgrades.
+- **Admin Dashboard**: Add analytics and management tools for admins.
+- **More AI Models**: Support for additional LLMs and voice providers.
+- **Mobile App**: Build a React Native or Expo version for iOS/Android.
+- **Gamification**: Add badges, streaks, and rewards for learning milestones.
+- **Social Features**: Allow users to share progress, invite friends, or collaborate.
+- **Accessibility**: Further improve accessibility for all users.
+- **Localization**: Add support for multiple languages and regions.
+- **Offline Mode**: Allow limited use without an internet connection.
+- **Custom Themes**: Let users personalize the app's appearance.
+
+---
+
+## 📄 License
+
+MIT
