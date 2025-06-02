@@ -187,5 +187,4 @@ For more details, see the [Vercel Next.js deployment guide](https://vercel.com/d
 ---
 
 ## 📄 License
-
-MIT
+MIT License
